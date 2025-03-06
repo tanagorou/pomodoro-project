@@ -1,0 +1,9 @@
+# Python環境関連
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 仮想環境（venv）
+.venv/
+env/
