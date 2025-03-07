@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>オリジナルタイマー</h1>
+
+    <div id="timerApp">  
+        <p id="timerString"></p>
+        <div>
+            <label>作業時間:
+                <input type="number" id="minFinishTime" value="00">分
+                <input type="number" id="secFinishTime" value="00">秒
+            </label>
+        </div>
+        <div>
+            <label>休憩時間:
+                <input type="number" id="minFinishRestTime" value="00">分
+                <input type="number" id="secFinishRestTime" value="00">秒
+            </label>
+        </div>
+        
+        <div id="timerButton">
+             <!-- onClick=" ~~~ "と言うところで、
+             ボタンを押したときに呼ばれる関数を指定する -->
+            <input type="button" value="スタート" onClick="OnStartButtonClick();">
+            <input type="button" value="ストップ" onClick="OnStopButtonClick();">
+            <input type="button" value="リセット" onClick="OnResetButtonClick();">
+        </div>
+        <div>
+            <input type="button" value="終了" onclick="OnFinishButtonClick();">
+            <p><span id="totalStudyTime">0</span>秒です</p>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
