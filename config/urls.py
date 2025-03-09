@@ -21,5 +21,7 @@ from base import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('', views.IndexPageView.as_view())
+    path('', views.IndexPageView.as_view()),
+    path('save_record/', views.save_record),
+    path('record/', views.RecordView.as_view()),
 ]
