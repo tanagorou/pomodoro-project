@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>オリジナルタイマー</h1>
+    <h1>オリジナルタイマーの設定</h1>
 
     <div id="timerApp">  
         <p id="timerString"></p>
@@ -32,10 +34,14 @@
         </div>
         <div>
             <input type="button" value="終了" onclick="OnFinishButtonClick();">
-            <p><span id="totalStudyTime">0</span>秒です</p>
+            <p>作業時間は<span id="totalStudyTime">0</span>秒です</p>
+            <p>休憩時間は<span id="totalRestTime">0</span>秒です</p>
         </div>
+        <p id="complete"></p>
+        <a href="/">戻る</a>
     </div>
 
-    <script src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>

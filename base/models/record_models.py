@@ -7,8 +7,8 @@ def create_id():
 
 class StudyRecordModel(models.Model):
     id = models.CharField(default=create_id, max_length=22, primary_key=True)
-    work_time = models.IntegerField(default=25)
-    rest_time = models.IntegerField(default=5)
+    work_time = models.IntegerField(default=0)
+    rest_time = models.IntegerField(default=0)
     total = models.IntegerField(default=0)
     completed = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
