@@ -1,0 +1,23 @@
+<h1>
+    {% if 'login' in request.path %}
+    Login
+    {% elif 'signup' in request.path %}
+    Signup
+    {% endif %}
+</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="username" placeholder="username">
+    <input type="email" name="email" placeholder="email" required>
+    <input type="password" name="password" placeholder="password" required>
+
+    <button type="submit">
+        {% if 'login' in request.path %}
+        Login
+        {% elif 'signup' in request.path %}
+        Signup
+        {% endif %}
+    </button>
+</form>
+

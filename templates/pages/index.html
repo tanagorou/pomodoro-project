@@ -1,6 +1,16 @@
 
 {% block main %}
 <h1>ようこそ颯汰のポメラードタイマへ！！</h1>
+    {% if user.is_authenticated %}
+        <p>こんにちは、{{ user.username }}さん</p>
+        <form action="/logout/" method="post">
+            {% csrf_token %}
+            <button type="submit">ログアウト</button>
+        </form>
+    {% else %}
+        <a href="/login/">ログイン</a>
+        <a href="/signup/">サインアップ</a>
+    {% endif %}
 <div>
     <a href="record/" type="button">
         <button type="button">作業に戻る</button>
