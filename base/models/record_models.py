@@ -1,12 +1,12 @@
 from django.db import models
-from django.utils.crypto import get_random_string
+from django.contrib.auth import get_user_model
+from base.models import create_id
 
-def create_id():
-    return get_random_string(22)
 
 
 class StudyRecordModel(models.Model):
     id = models.CharField(default=create_id, max_length=22, primary_key=True)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     work_time = models.IntegerField(default=0)
     rest_time = models.IntegerField(default=0)
     total = models.IntegerField(default=0)

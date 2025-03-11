@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
@@ -6,7 +7,7 @@ from django.views.generic import TemplateView
 
 from base.models import StudyRecordModel
 
-class RecordView(TemplateView):
+class RecordView(LoginRequiredMixin,TemplateView):
     template_name = 'pages/record.html'
 
 @csrf_exempt
@@ -15,6 +16,7 @@ def save_record(request):
         try:
             data = json.loads(request.body)
             record = StudyRecordModel.objects.create(
+                user=request.user,
                 work_time=data['work_time'],
                 rest_time=data['rest_time'],
                 total=data['total'],

@@ -1,2 +1,2 @@
-from .record_models import *
 from .accounts_models import *
+from .record_models import *

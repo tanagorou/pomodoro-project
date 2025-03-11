@@ -4,9 +4,10 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils.crypto import get_random_string
 
-from base.models import create_id
-
+def create_id():
+    return get_random_string(22)
 
 class UserManager(BaseUserManager):
     def create_user(self, username, email, password=None):
