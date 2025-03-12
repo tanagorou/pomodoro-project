@@ -31,6 +31,6 @@ urlpatterns = [
 
 
     path('', views.IndexPageView.as_view()),
-    path('save_record/', views.save_record),
+    path('save_record/', views.StudyRecordCreateView.as_view()),
     path('record/', views.RecordView.as_view()),
 ]
