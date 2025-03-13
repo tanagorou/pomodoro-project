@@ -36,6 +36,9 @@ const secFinishRestTime = document.querySelector('#secFinishRestTime')
 
 
 function sendStudyRecord(workTime, restTime, total){
+
+    const token = localStorage.getItem('jwt_token')
+
     const payload = {
         work_time: workTime,
         rest_time: restTime,
@@ -47,7 +50,7 @@ function sendStudyRecord(workTime, restTime, total){
     axios.post('/save_record/', payload, {
         headers: {
             'Content-Type': 'application/json',
-            'X-CSRFToken': getCSRFToken()  // CSRFトークンを取得
+            'Authorization': `JWT ${token}`
         }
     })
         .then((res) => {

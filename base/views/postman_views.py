@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
+from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 import json
 
@@ -13,15 +14,14 @@ from base.models import StudyRecordModel
 from base.serializers import StudyRecordSerializer
 
 
-class RecordView(LoginRequiredMixin,TemplateView):
+class RecordView(TemplateView):
     template_name = 'pages/record.html'
 
 class StudyRecordCreateView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
-        print(f'request:{request}')
-        print(f'request.user:{request.user}')
+        print(f'request:{request.data}')
         serializer = StudyRecordSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
             record = serializer.save()
