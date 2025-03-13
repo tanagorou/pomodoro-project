@@ -25,8 +25,10 @@ urlpatterns = [
     path("admin/", admin.site.urls),
 
     # Account
-    path('signup/',views.SignUpView.as_view()),
+    path('signup/', views.SignupTemplateView.as_view()),
+    path('api/signup/',views.SignUpView.as_view()),
     path('login/',views.Login.as_view()),
+    path('api/token/', views.LoginView.as_view()),
     path('logout/',LogoutView.as_view()),
 
 
