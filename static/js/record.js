@@ -35,7 +35,7 @@ const minFinishRestTime = document.querySelector('#minFinishRestTime')
 const secFinishRestTime = document.querySelector('#secFinishRestTime')
 
 
-function sendStudyRecord(workTime, restTime, total){
+async function sendStudyRecord(workTime, restTime, total){
 
     const token = localStorage.getItem('jwt_token')
 
@@ -47,37 +47,48 @@ function sendStudyRecord(workTime, restTime, total){
     };
 
     console.log('送信データ',payload);
-    axios.post('/save_record/', payload, {
+    try {
+        const res = await axios.post('/save_record/', payload, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `JWT ${token}`
         }
-    })
-        .then((res) => {
-            console.log('データ送信成功',res.data);
-            completeDOM = document.getElementById('complete')
-            completeDOM.textContent = '記録を保存しました'
-        })
-        .catch((err) => {
-            console.log('データ送信失敗',err)
-            completeDOM = document.getElementById('complete')
-            completeDOM.innerHTML = '記録が保存できませんでした'
-        });
-}
 
-// CSRFトークンを取得する関数
-function getCSRFToken() {
-    let cookieValue = null;
-    const cookies = document.cookie.split(';');
-    for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].trim();
-        if (cookie.startsWith('csrftoken=')) {
-            cookieValue = cookie.substring('csrftoken='.length, cookie.length);
-            break;
+    })
+        console.log('データ送信成功',res.data);
+        completeDOM = document.getElementById('complete')
+        completeDOM.textContent = '記録を保存しました'
+    } catch(err) {
+        if(err.response && err.response.status === 401){
+                console.log('JWTトークンが切れています。再発行中です。。。')
+                const newToken = await refreshAccessToken();
+
+                if(!newToken){
+                    console.log('トークンの更新失敗。再ログインしてください')
+                    //window.location.href = '/login/'
+                    return
+                }
+                try {
+                    const retryRes = await axios.post('/save_record/', payload, {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `JWT ${newToken}`
+                        }
+                    })
+                    console.log('記録の保存成功（リトライ):',retryRes.data)
+                    completeDOM = document.getElementById('complete')
+                    completeDOM.innerHTML = '記録が保存できました'
+                } catch (retryErr) {
+                    console.log('記録の保存の失敗:', retryErr)
+                    console.log('データ送信失敗', err)
+                    completeDOM = document.getElementById('complete')
+                    completeDOM.innerHTML = '記録が保存できませんでした'
+                }
         }
     }
-    return cookieValue;
 }
+
+
 
 window.onload = function(){
     timerStringDOM = document.getElementById('timerString')
@@ -218,7 +229,7 @@ function OnStopButtonClick(){
 }
 
 //リセットボタンが押されたら
-function OnResetButtonClick(){
+function OnResetButtonClick() {
     OnStopButtonClick()
     timerStringDOM.innerHTML = '00:00'
     currentTimerTime = 0

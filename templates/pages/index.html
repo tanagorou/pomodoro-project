@@ -1,16 +1,24 @@
+{% load static %}
 
-{% block main %}
-<h1>ようこそ颯汰のポメラードタイマへ！！</h1>
-    {% if user.is_authenticated %}
-        <p>こんにちは、{{ user.username }}さん</p>
-        <form action="/logout/" method="post">
-            {% csrf_token %}
-            <button type="submit">ログアウト</button>
-        </form>
-    {% else %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<h1>ようこそ颯汰のポメラードタイマへ！!</h1>
+    <p id="user_message">読み込み中...</p>
+    <div id="auth-button">
         <a href="/login/">ログイン</a>
         <a href="/signup/">サインアップ</a>
-    {% endif %}
+    </div>
+
+    <form id="logout-form" action="/login/" method="post">
+        {% csrf_token %}
+        <button id="logoutButton" type="submit">ログアウト</button>
+    </form>
 <div>
     <a href="record/" type="button">
         <button type="button">作業に戻る</button>
@@ -21,5 +29,8 @@
         <button type="button">毎日の記録を見る</button>
     </a>
 </div>
-
-{% endblock %}
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="{% static 'js/index.js' %}?v=1"></script>
+<script src="{% static 'js/logout.js' %}?v=1"></script>
+</body>
+</html>
