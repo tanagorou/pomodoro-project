@@ -3,6 +3,7 @@ from django.contrib.auth.views import LoginView
 from django.views.generic import CreateView, UpdateView, TemplateView
 from django.contrib.auth import get_user_model
 from rest_framework import status
+from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -24,13 +25,42 @@ class AutenticatedUserView(APIView):
 class Login(LoginView):
     template_name = 'pages/login_signup.html'
 
-class LoginView(TokenObtainPairView):
-    def post(self, request, *args, **kwargs):
-        response = super().post(request, *args, **kwargs)
+#ログイン時に独自にJWTを発行
+class LoginView(APIView):
+    permission_classes = [AllowAny]
+    def post(self,request):
+        email = request.data.get('email')
+        password = request.data.get('password')
+        print(email, password)
 
-        if response.status_code == status.HTTP_200_OK:
-            response.data['message'] = 'Login Successful'
-        return response
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            raise AuthenticationFailed('このメールアドレスは登録されておりません。')
+
+        if not user.check_password(password):
+            raise AuthenticationFailed('パスワードが正しくありません')
+
+        refresh = RefreshToken.for_user(user)
+        access = refresh.access_token
+
+        return Response({
+            'access' : str(access),
+            'refresh' : str(refresh),
+            'user_id': str(user.id),
+            'message': 'ログインが正常に完了しました。'
+        },status=status.HTTP_200_OK)
+
+
+#class LoginView(TokenObtainPairView):
+#    serializer_class = CustomTokenObtainPairSerializer
+#    def post(self, request, *args, **kwargs):
+#
+#        response = super().post(request, *args, **kwargs)
+#
+#        if response.status_code == status.HTTP_200_OK:
+#            response.data['message'] = 'Login Successful'
+#        return response
 
 
 class SignupTemplateView(TemplateView):

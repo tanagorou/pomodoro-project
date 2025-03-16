@@ -4,7 +4,9 @@ form.addEventListener('submit', async function(e) {
     e.preventDefault();
     console.log("現在のURLパス:", window.location.pathname);
     const isSignup = window.location.pathname.includes('signup');
-    const endpoint = isSignup ? '/api/signup/' : '/api/token/'
+    const endpoint = isSignup ? '/api/signup/' : '/api/login/'
+
+    console.log(document.getElementById('username').value)
 
     const formData = {
         'username': document.getElementById('username').value,

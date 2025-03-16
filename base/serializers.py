@@ -1,9 +1,39 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from base.models import StudyRecordModel
-
+from rest_framework.exceptions import AuthenticationFailed
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 User = get_user_model()
+
+#class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+#    def __init__(self, *args, **kwargs):
+#        super().__init__(*args, **kwargs)
+#
+#
+#TokenObtainPairViewはデフォルトでパスワードとユーザーネームを使って認証するため送ったemailの内容はない、Noneと帰ってきていた
+#そのためusernameのところにemailを割り当て、あたかもemailでログインしているように見せる必要がある
+#
+#        self.fields['email'] = self.fields['username']
+#
+#    def validate(self, attrs):
+#        print('実行されました')
+#        username = attrs.get('username')
+#        email = attrs.get('email')
+#        password = attrs.get('password')
+#        print(username, email, password)
+#
+#        try:
+#            user = User.objects.get(email=email)
+#        except User.DoesNotExist:
+#            raise AuthenticationFailed('このemailは登録されていません')
+#        if not user.check_password(password) or user.username != username:
+#            raise AuthenticationFailed('パスワードまたはユーザーネームが正しくありません')
+#
+#        attrs['user'] = user.username
+#        return super().validate(attrs)
+
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User

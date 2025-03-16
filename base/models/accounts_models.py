@@ -62,7 +62,6 @@ class Profile(models.Model):
 @receiver(post_save, sender=User)
 def create_one_to_one(sender, **kwargs):
     if kwargs['created']:
-        print(f'kwargs[instance]={kwargs['instance']}]')
         Profile.objects.create(user=kwargs['instance'])
 
 

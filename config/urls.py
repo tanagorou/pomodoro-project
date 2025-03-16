@@ -36,7 +36,7 @@ urlpatterns = [
 
     # Account API
     path('api/signup/', views.SignUpView.as_view()),
-    path('api/token/', views.LoginView.as_view()),
+    path('api/login/', views.LoginView.as_view()),
     path('api/user/', views.AutenticatedUserView.as_view()),
     path('api/token/refresh/', TokenRefreshView.as_view()),
     path('api/token/verify/', TokenVerifyView.as_view()),
