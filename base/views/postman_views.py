@@ -1,3 +1,5 @@
+from datetime import date, timedelta
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -9,14 +11,46 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
+from rest_framework.viewsets import ModelViewSet
 
 from base.models import StudyRecordModel
-from base.serializers import StudyRecordSerializer
+from base.serializers import StudyRecordSerializer,ListRecordSerializer
 
+class ListRecordView(TemplateView):
+    template_name = 'pages/record_list.html'
+class ListRecordAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request):
+        user = request.user
+        today = date.today()
+        period = request.GET.get('period')
+
+        if period == 'day':
+            queryset = StudyRecordModel.objects.filter(
+                user=user, created__date=today)
+
+        elif period == 'week':
+            day_of_week = today.weekday()
+            monday = today -timedelta(days=day_of_week)
+            sunday = monday + timedelta(days=6)
+            queryset = StudyRecordModel.objects.filter(
+                user=user,
+                created__date__range=[monday, sunday]
+            )
+        elif period == 'month':
+            month_start_day = today.replace(day=1)
+            queryset = StudyRecordModel.objects.filter(
+                user=user,
+                created__date__gte=month_start_day
+            )
+        else:
+            return Response({'error':'Invalid period'}, status=400)
+
+        serializer = ListRecordSerializer(queryset, many=True)
+        return Response(serializer.data)
 
 class RecordView(TemplateView):
     template_name = 'pages/record.html'
-
 class StudyRecordCreateView(APIView):
     permission_classes = [IsAuthenticated]
 

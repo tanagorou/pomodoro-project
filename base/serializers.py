@@ -44,6 +44,25 @@ class UserSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(**validated_data)
         return user
 
+class ListRecordSerializer(serializers.ModelSerializer):
+    work_time = serializers.SerializerMethodField()
+    rest_time = serializers.SerializerMethodField()
+    total = serializers.SerializerMethodField()
+    print(work_time)
+
+    class Meta:
+        model = StudyRecordModel
+        fields = ['id','work_time','rest_time','total','created']
+
+    def get_work_time(self, obj):
+        return obj.work_time // 60
+
+    def get_rest_time(self, obj):
+        return obj.rest_time // 60
+
+    def get_total(self, obj):
+        return obj.total // 60
+
 
 class StudyRecordSerializer(serializers.ModelSerializer):
     class Meta:
