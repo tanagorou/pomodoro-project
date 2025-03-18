@@ -12,11 +12,14 @@ async function checkLogin(){
             headers: { Authorization: `JWT ${token}`}
         })
         console.log('認証成功',res)
-        document.getElementById('user_message').textContent = `ようこそ、${res.data.username}`
+        document.getElementById('user_message').textContent = `ようこそ、${res.data.username}さん！！！`
         document.getElementById('auth-button').style.display = 'none';
         document.getElementById('logout-form').style.display = 'block'
     } catch (err) {
         console.log('認証失敗',err)
+        document.getElementById('user_message').textContent = 'ログインしてください';
+        document.getElementById('auth-button').style.display = 'block';
+        document.getElementById('logout-form').style.display = 'none'
     }
 }
 
