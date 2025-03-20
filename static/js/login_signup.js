@@ -39,6 +39,7 @@ form.addEventListener('submit', async function(e) {
             console.log('これはログインです。送信成功です')
             localStorage.setItem('jwt_token', res.data.access)
             localStorage.setItem('refresh_token', res.data.refresh)
+            window.location.href = '/'
         } catch (err) {
             console.log('これはログインです。送信できませんでした',err)
         }
