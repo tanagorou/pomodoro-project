@@ -1,0 +1,146 @@
+/* 背景をグラデーションに */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    color: #2e7d32;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+/* タイマーアプリのコンテナ */
+#timerApp {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 128, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* フェードインアニメーション */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* タイマーのデジタル風表示 */
+#timerString {
+    font-size: 48px;
+    font-weight: bold;
+    color: #1b5e20;
+    margin: 20px 0;
+    font-family: 'Courier New', Courier, monospace;
+    text-shadow: 2px 2px 8px rgba(0, 128, 0, 0.3);
+}
+
+/* 入力フィールドのスタイル */
+input[type="number"] {
+    width: 60px;
+    padding: 8px;
+    font-size: 18px;
+    text-align: center;
+    border: 2px solid #66bb6a;
+    border-radius: 10px;
+    margin: 5px;
+    background: #f1f8e9;
+    color: #2e7d32;
+}
+
+/* ボタンの共通スタイル */
+input[type="button"] {
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin: 10px;
+    width: 120px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 128, 0, 0.2);
+}
+
+/* スタートボタン */
+input[value="スタート"] {
+    background-color: #43a047;
+    color: white;
+}
+
+input[value="スタート"]:hover {
+    background-color: #2e7d32;
+    transform: scale(1.1);
+    box-shadow: 0 6px 10px rgba(0, 128, 0, 0.3);
+}
+
+/* ストップボタン */
+input[value="ストップ"] {
+    background-color: #fbc02d;
+    color: white;
+}
+
+input[value="ストップ"]:hover {
+    background-color: #f9a825;
+    transform: scale(1.1);
+}
+
+/* リセットボタン */
+input[value="リセット"] {
+    background-color: #1976d2;
+    color: white;
+}
+
+input[value="リセット"]:hover {
+    background-color: #1565c0;
+    transform: scale(1.1);
+}
+
+/* 終了ボタン */
+input[value="終了"] {
+    background-color: #c62828;
+    color: white;
+}
+
+input[value="終了"]:hover {
+    background-color: #b71c1c;
+    transform: scale(1.1);
+}
+
+/* 作業時間と休憩時間の表示 */
+p {
+    font-size: 18px;
+    color: #388e3c;
+    margin: 10px 0;
+}
+
+/* 戻るリンク */
+a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #388e3c;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+
+a:hover {
+    background-color: #2e7d32;
+    transform: scale(1.1);
+}

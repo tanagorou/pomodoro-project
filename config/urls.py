@@ -34,6 +34,9 @@ urlpatterns = [
     path('login/',views.Login.as_view()),
     path('logout/',LogoutView.as_view()),
 
+    # Record
+    path('list/record/', views.ListRecordView.as_view()),
+
     # Account API
     path('api/signup/', views.SignUpView.as_view()),
     path('api/login/', views.LoginView.as_view()),
@@ -41,6 +44,9 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view()),
     path('api/token/verify/', TokenVerifyView.as_view()),
     path('', views.IndexPageView.as_view()),
+
+    # Record API
     path('save_record/', views.StudyRecordCreateView.as_view()),
+    path('api/list/record/',views.ListRecordAPIView.as_view()),
     path('record/', views.RecordView.as_view()),
 ]

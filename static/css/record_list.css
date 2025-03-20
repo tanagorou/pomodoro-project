@@ -1,0 +1,123 @@
+/* 背景をグラデーションに */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    color: #2e7d32;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+/* フェードインアニメーション */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 記録コンテナ */
+#recordContainer {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 128, 0, 0.2);
+    max-width: 500px;
+    width: 90%;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* タイトル */
+h1 {
+    font-size: 26px;
+    font-weight: bold;
+    color: #1b5e20;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 5px rgba(0, 128, 0, 0.3);
+}
+
+/* メッセージ */
+p {
+    font-size: 18px;
+    color: #388e3c;
+    margin-bottom: 15px;
+}
+
+/* グラフのサイズ調整 */
+canvas {
+    max-width: 100%;
+    height: 300px;
+    margin-bottom: 20px;
+}
+
+/* 🔹 ボタンを横並びに配置するための親コンテナ */
+#buttonContainer {
+    display: flex;
+    justify-content: center; /* 中央配置 */
+    gap: 20px; /* ボタンの間の余白 */
+    margin-top: 15px;
+}
+
+/* ボタンの共通スタイル */
+button {
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    width: 140px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 128, 0, 0.2);
+}
+
+/* 🔵 前の週ボタン */
+button[onclick="changeWeek(-1)"] {
+    background-color: #1976d2;
+    color: white;
+}
+
+button[onclick="changeWeek(-1)"]:hover {
+    background-color: #1565c0;
+    transform: scale(1.1);
+}
+
+/* 🟡 次の週ボタン */
+button[onclick="changeWeek(1)"] {
+    background-color: #fbc02d;
+    color: white;
+}
+
+button[onclick="changeWeek(1)"]:hover {
+    background-color: #f9a825;
+    transform: scale(1.1);
+}
+
+/* 戻るリンク */
+a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #388e3c;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+
+a:hover {
+    background-color: #2e7d32;
+    transform: scale(1.1);
+}

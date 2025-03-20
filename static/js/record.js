@@ -65,7 +65,7 @@ async function sendStudyRecord(workTime, restTime, total){
 
                 if(!newToken){
                     console.log('トークンの更新失敗。再ログインしてください')
-                    //window.location.href = '/login/'
+                    window.location.href = '/login/'
                     return
                 }
                 try {

@@ -1,0 +1,198 @@
+/* 📱 Appleライクな背景（緑ベースに変更） */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    color: #2e7d32;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* 🎥 フェードインアニメーション */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 🎨 コンテナデザイン（ニューモーフィズム風） */
+#container {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 15px rgba(0, 128, 0, 0.1), -5px -5px 15px rgba(255, 255, 255, 0.7);
+    max-width: 400px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+/* 🏆 タイトル */
+h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #1b5e20;
+    text-shadow: 2px 2px 5px rgba(0, 128, 0, 0.3);
+    margin-bottom: 10px;
+}
+
+/* 📜 メッセージ */
+#user_message {
+    font-size: 18px;
+    color: #388e3c;
+    margin-bottom: 20px;
+}
+
+/* 🕹️ ボタンの共通スタイル */
+.button {
+    display: inline-block;
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 3px 3px 10px rgba(0, 128, 0, 0.2);
+}
+
+/* 🟢 ログイン・サインアップボタン（緑基調） */
+#auth-button a {
+    text-decoration: none;
+    color: white;
+    background: linear-gradient(135deg, #43a047, #2e7d32);
+    padding: 12px 0;
+    display: block;
+    border-radius: 12px;
+}
+
+#auth-button a:hover {
+    background: linear-gradient(135deg, #2e7d32, #1b5e20);
+    transform: scale(1.05);
+}
+
+/* 🔴 ログアウトボタン */
+#logoutButton {
+    background: linear-gradient(135deg, #c62828, #b71c1c);
+    color: white;
+}
+
+#logoutButton:hover {
+    background: linear-gradient(135deg, #b71c1c, #a60010);
+    transform: scale(1.05);
+}
+
+/* 📋 記録ボタン */
+.button.record {
+    background: linear-gradient(135deg, #66bb6a, #388e3c);
+    color: white;
+}
+
+.button.record:hover {
+    background: linear-gradient(135deg, #388e3c, #1f7a33);
+    transform: scale(1.05);
+}
+
+/* 📊 毎日の記録ボタン */
+.button.history {
+    background: linear-gradient(135deg, #9ccc65, #7cb342);
+    color: white;
+}
+
+.button.history:hover {
+    background: linear-gradient(135deg, #7cb342, #558b2f);
+    transform: scale(1.05);
+}
+
+/* 🍏 フォームコンテナ */
+#submitForm {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 15px rgba(0, 128, 0, 0.1), -5px -5px 15px rgba(255, 255, 255, 0.7);
+    max-width: 350px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+/* 🔹 フォーム入力欄 */
+input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    background: #f1f8e9;
+    box-shadow: inset 3px 3px 5px rgba(0, 128, 0, 0.1), inset -3px -3px 5px rgba(255, 255, 255, 0.9);
+    outline: none;
+    transition: all 0.3s ease-in-out;
+}
+
+/* 📍 フォーカス時のエフェクト */
+input:focus {
+    background: white;
+    box-shadow: 0 0 8px rgba(0, 150, 136, 0.3);
+}
+
+/* 🚀 サブミットボタン */
+button {
+    padding: 12px 0;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: linear-gradient(135deg, #43a047, #2e7d32);
+    color: white;
+    box-shadow: 3px 3px 10px rgba(0, 128, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #2e7d32, #1b5e20);
+    transform: scale(1.05);
+}
+
+/* 🍏 戻るボタン */
+a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(135deg, #43a047, #2e7d32);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 3px 3px 10px rgba(0, 128, 0, 0.2);
+}
+
+a:hover {
+    background: linear-gradient(135deg, #2e7d32, #2c9a46);
+    transform: scale(1.05);
+}
+
+/* 🎥 ボタン押したときのエフェクト */
+button:active, a:active {
+    transform: scale(0.97);
+}
+
