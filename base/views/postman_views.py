@@ -25,18 +25,22 @@ class ListRecordAPIView(APIView):
         today = date.today()
         period = request.GET.get('period')
 
+        # 前の週、次の週のデータをとれるようにする
+        offset = int(request.GET.get('offset',0))
+
         if period == 'day':
             queryset = StudyRecordModel.objects.filter(
                 user=user, created__date=today)
 
         elif period == 'week':
             day_of_week = today.weekday()
-            monday = today -timedelta(days=day_of_week)
+            monday = today -timedelta(days=day_of_week) + timedelta(weeks=offset)
             sunday = monday + timedelta(days=6)
             queryset = StudyRecordModel.objects.filter(
                 user=user,
                 created__date__range=[monday, sunday]
             )
+
         elif period == 'month':
             month_start_day = today.replace(day=1)
             queryset = StudyRecordModel.objects.filter(
