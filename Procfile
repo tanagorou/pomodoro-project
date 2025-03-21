@@ -1,1 +1,1 @@
-web: gunicorn pomodoro_project.wsgi --log-file -
+web: gunicorn config.wsgi --log-file -
