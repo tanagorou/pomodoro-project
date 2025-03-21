@@ -9,8 +9,13 @@ import  dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env()
+
+if os.getenv('RENDER') is None:
+    env.read_env(os.path.join(BASE_DIR, 'config_secrets/.env.dev'))
+
 root = environ.Path(BASE_DIR / 'config_secrets')
-env.read_env(root('.env.dev'))
+#env.read_env(root('.env.dev'))
+#env.read_env(root('.env.prod'))
 
 SECRET_KEY = env.str('SECRET_KEY')
 
