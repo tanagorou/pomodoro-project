@@ -19,9 +19,9 @@ root = environ.Path(BASE_DIR / 'config_secrets')
 
 SECRET_KEY = env.str('SECRET_KEY')
 
-DEBUG = env.bool('DEBUG')
+DEBUG = env.bool('DEBUG', default=False)
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['127.0.0.1','localhost'])
 
 INSTALLED_APPS = [
     "django.contrib.admin",
