@@ -22,7 +22,6 @@ SECRET_KEY = env.str('SECRET_KEY')
 DEBUG = env.bool('DEBUG', default=False)
 
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['127.0.0.1','localhost'])
-print(f"🚀 ALLOWED_HOSTS: {ALLOWED_HOSTS}")
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -51,8 +50,6 @@ ROOT_URLCONF = "config.urls"
 CSRF_TRUSTED_ORIGINS = [
     "https://poromodetimer.onrender.com"
 ]
-print(f"🚀 DEBUG: {DEBUG}")
-print(f"🚀 CSRF_TRUSTED_ORIGINS: {CSRF_TRUSTED_ORIGINS}")
 
 
 TEMPLATES = [
@@ -125,7 +122,10 @@ LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = '/'
 
 STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),  # 🔥 ここを追加！（開発用）
+]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CORS_ALLOW_ALL_ORIGINS = True
