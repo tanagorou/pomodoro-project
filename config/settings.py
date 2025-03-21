@@ -112,9 +112,7 @@ LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = '/'
 
 STATIC_URL = "/static/"
-STATIC_ROOT = [
-    os.path.join(BASE_DIR, 'static')
-]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CORS_ALLOW_ALL_ORIGINS = True
