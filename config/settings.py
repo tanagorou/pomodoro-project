@@ -51,6 +51,8 @@ ROOT_URLCONF = "config.urls"
 CSRF_TRUSTED_ORIGINS = [
     "https://poromodetimer.onrender.com"
 ]
+print(f"🚀 DEBUG: {DEBUG}")
+print(f"🚀 CSRF_TRUSTED_ORIGINS: {CSRF_TRUSTED_ORIGINS}")
 
 
 TEMPLATES = [
