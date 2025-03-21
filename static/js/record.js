@@ -88,6 +88,25 @@ async function sendStudyRecord(workTime, restTime, total){
     }
 }
 
+function playSound(str){
+    let audio = document.getElementById('notificationSound')
+    audio.play().catch(err => {console.log('音声の再生に失敗',err)})
+    alert(str)
+    audio.pause()
+    audio.currentTime = 0
+}
+
+function soundBreakEnd(){
+    playSound()
+    alert('休憩終了です')
+
+}
+
+function soundStudyEnd(){
+    playSound()
+    alert('作業終了です')
+
+}
 
 
 window.onload = function(){
@@ -176,7 +195,7 @@ function UpdateTimer(){
          if (finishRestTime < elapsedSeconds ){
             restLoop += 1
             clearInterval(timerId)
-            alert('休憩終了です')
+            playSound('休憩終了です')
             timerStringDOM.innerHTML = '00:00'
 
             timerId = null
@@ -191,7 +210,7 @@ function UpdateTimer(){
         if (finishTime < elapsedSeconds ){
             studyLoop += 1
             clearInterval(timerId)
-            alert('作業終了です')
+            playSound('作業終了です')
             timerStringDOM.innerHTML = '00:00'
             timerId = null
             restTime = true
