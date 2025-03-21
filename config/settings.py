@@ -48,6 +48,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "config.urls"
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://poromodetimer.onrender.com"
+]
+
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
