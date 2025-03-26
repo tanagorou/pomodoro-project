@@ -1,5 +1,5 @@
 let charVar = []
-
+checkLogin()
 async function listDayRecord(period, offset = 0){
     let dailyRecord = {}
     const token = localStorage.getItem('jwt_token')
@@ -152,3 +152,4 @@ function drawChart(offset = 0) {
         }
     })
 }
+
