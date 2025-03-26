@@ -144,7 +144,7 @@ function soundBreakEnd(){
 
 function soundStudyEnd(){
     //const audio = playSound()
-    //showNotification('作業終了','休憩も時には大事です！！！')
+    showNotification('作業終了','休憩も時には大事です！！！')
     //setTimeout(() => {
     //    if(audio) {
     //        audio.pause()
@@ -298,6 +298,16 @@ function OnResetButtonClick() {
     OnStopButtonClick()
     timerStringDOM.innerHTML = '00:00'
     currentTimerTime = 0
+    minTotalTime = 0
+    secTotalTime = 0
+    grobalStudyMin = 0
+    grobalStudySec = 0
+
+    minTotalRestTime = 0
+    secTotalRestTime = 0
+    grobalRestMin = 0
+    grobalRestSec = 0
+
     studyLoop = 0;
     restLoop = 0;
 }
