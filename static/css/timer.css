@@ -119,6 +119,16 @@ input[value="終了"]:hover {
     transform: scale(1.1);
 }
 
+/* タイトル */
+h1 {
+    font-size: 26px;
+    font-weight: bold;
+    color: #1b5e20;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 5px rgba(0, 128, 0, 0.3);
+}
+
+
 /* 作業時間と休憩時間の表示 */
 p {
     font-size: 18px;

@@ -34,9 +34,26 @@ const secFinishTime = document.querySelector('#secFinishTime')
 const minFinishRestTime = document.querySelector('#minFinishRestTime')
 const secFinishRestTime = document.querySelector('#secFinishRestTime')
 
+async function checkLogin(){
+    const token = localStorage.getItem('jwt_token')
+    try{
+        const res = await axios.get('/api/user/', {
+            headers: { Authorization: `JWT ${token}`}
+        })
+        console.log('認証成功',res.data)
+        document.getElementById('title').textContent = 'ようこそ！！颯汰のポメラードタイマーへ！！'
+    } catch (err) {
+        console.log('認証失敗',err)
+        window.location.href = '/login/'
+    }
+}
+
+
 document.addEventListener('DOMContentLoaded', function(){
     checkLogin()
 })
+
+
 
 async function sendStudyRecord(workTime, restTime, total){
 
@@ -91,6 +108,7 @@ async function sendStudyRecord(workTime, restTime, total){
     }
 }
 
+// タイマー終了時にユーザーに報告
 function showNotification(title, body){
     if(Notification.permission === 'granted'){
         new Notification(title,{body:body})
@@ -114,25 +132,25 @@ function playSound(){
 }
 
 function soundBreakEnd(){
-    const audio = playSound()
+    //const audio = playSound()
     showNotification('休憩終了','そろそろ作業を再開しましょう')
-    setTimeout(() => {
-        if(audio) {
-            audio.pause()
-            audio.curretTime = 0;
-        }
-    }, 5000)
+    //setTimeout(() => {
+    //    if(audio) {
+    //        audio.pause()
+    //        audio.curretTime = 0;
+    //    }
+    //}, 5000)
 }
 
 function soundStudyEnd(){
-    const audio = playSound()
-    showNotification('作業終了','休憩も時には大事です！！！')
-    setTimeout(() => {
-        if(audio) {
-            audio.pause()
-            audio.curretTime = 0;
-        }
-    }, 5000)
+    //const audio = playSound()
+    //showNotification('作業終了','休憩も時には大事です！！！')
+    //setTimeout(() => {
+    //    if(audio) {
+    //        audio.pause()
+    //        audio.curretTime = 0;
+    //    }
+    //}, 5000)
 }
 
 

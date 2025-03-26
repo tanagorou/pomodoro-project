@@ -1,5 +1,32 @@
 let charVar = []
-checkLogin()
+
+async function checkLogin(){
+    const token = localStorage.getItem('jwt_token')
+    document.getElementById('message').style.display = 'none'
+    document.getElementById('canvas').style.display = 'none'
+    document.getElementById('button').style.display = 'none'
+    document.getElementById('return_index').style.display = 'none'
+
+
+
+    try{
+        const res = await axios.get('/api/user/', {
+            headers: { Authorization: `JWT ${token}`}
+        })
+        console.log('認証成功',res.data)
+        document.getElementById('title').textContent = '毎日の記録'
+        document.getElementById('canvas').style.display = 'block'
+        document.getElementById('message').style.display = 'block'
+        document.getElementById('button').style.display = 'block'
+        document.getElementById('return_index').style.display = 'block'
+
+    } catch (err) {
+        console.log('認証失敗',err)
+        window.location.href = '/login/'
+    }
+}
+
+
 async function listDayRecord(period, offset = 0){
     let dailyRecord = {}
     const token = localStorage.getItem('jwt_token')
@@ -75,6 +102,7 @@ async function changeWeek(direction){
 }
 
 document.addEventListener('DOMContentLoaded', async function(){
+    checkLogin()
     await listDayRecord('day')
     let weekRecord = await listDayRecord('week', currentOffset)
     await listDayRecord('month')
