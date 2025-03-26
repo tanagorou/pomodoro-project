@@ -23,3 +23,16 @@ async function refreshAccessToken(){
         return null
     }
 }
+
+async function checkLogin(){
+    const token = localStorage.getItem('jwt_token')
+    try{
+        const res = await axios.get('/api/user/', {
+            headers: { Authorization: `JWT ${token}`}
+        })
+        console.log('認証成功',res.data)
+    } catch (err) {
+        console.log('認証失敗',err)
+        window.location.href = '/login/'
+    }
+}

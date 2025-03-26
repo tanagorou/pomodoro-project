@@ -9,14 +9,19 @@ import  dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env()
+
+if os.getenv('RENDER') is None:
+    env.read_env(os.path.join(BASE_DIR, 'config_secrets/.env.dev'))
+
 root = environ.Path(BASE_DIR / 'config_secrets')
-env.read_env(root('.env.dev'))
+#env.read_env(root('.env.dev'))
+#env.read_env(root('.env.prod'))
 
 SECRET_KEY = env.str('SECRET_KEY')
 
-DEBUG = env.bool('DEBUG')
+DEBUG = env.bool('DEBUG', default=False)
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['127.0.0.1','localhost'])
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -32,6 +37,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -41,6 +47,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "config.urls"
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://poromodetimer.onrender.com"
+]
+
 
 TEMPLATES = [
     {
@@ -112,8 +123,9 @@ LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = '/'
 
 STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+    os.path.join(BASE_DIR, "static"),  # 🔥 ここを追加！（開発用）
 ]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

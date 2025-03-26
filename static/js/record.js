@@ -34,6 +34,9 @@ const secFinishTime = document.querySelector('#secFinishTime')
 const minFinishRestTime = document.querySelector('#minFinishRestTime')
 const secFinishRestTime = document.querySelector('#secFinishRestTime')
 
+document.addEventListener('DOMContentLoaded', function(){
+    checkLogin()
+})
 
 async function sendStudyRecord(workTime, restTime, total){
 
@@ -88,9 +91,53 @@ async function sendStudyRecord(workTime, restTime, total){
     }
 }
 
+function showNotification(title, body){
+    if(Notification.permission === 'granted'){
+        new Notification(title,{body:body})
+    } else if (Notification.permission !== 'denied'){
+        Notification.requestPermission().then(permission =>{
+            if(permission === 'granted'){
+                new Notification(title, {body:body})
+            }
+        })
+    }
+}
+
+function playSound(){
+    let audio = document.getElementById('notificationSound')
+    if(audio){
+        audio.play().catch(err =>
+            {console.log('音声の再生に失敗',err)
+        })
+    }
+    return audio
+}
+
+function soundBreakEnd(){
+    const audio = playSound()
+    showNotification('休憩終了','そろそろ作業を再開しましょう')
+    setTimeout(() => {
+        if(audio) {
+            audio.pause()
+            audio.curretTime = 0;
+        }
+    }, 5000)
+}
+
+function soundStudyEnd(){
+    const audio = playSound()
+    showNotification('作業終了','休憩も時には大事です！！！')
+    setTimeout(() => {
+        if(audio) {
+            audio.pause()
+            audio.curretTime = 0;
+        }
+    }, 5000)
+}
 
 
 window.onload = function(){
+
     timerStringDOM = document.getElementById('timerString')
     timerStringDOM.innerHTML = '00:00'
 
@@ -176,7 +223,7 @@ function UpdateTimer(){
          if (finishRestTime < elapsedSeconds ){
             restLoop += 1
             clearInterval(timerId)
-            alert('休憩終了です')
+            soundBreakEnd()
             timerStringDOM.innerHTML = '00:00'
 
             timerId = null
@@ -191,7 +238,7 @@ function UpdateTimer(){
         if (finishTime < elapsedSeconds ){
             studyLoop += 1
             clearInterval(timerId)
-            alert('作業終了です')
+            soundStudyEnd()
             timerStringDOM.innerHTML = '00:00'
             timerId = null
             restTime = true
@@ -236,3 +283,4 @@ function OnResetButtonClick() {
     studyLoop = 0;
     restLoop = 0;
 }
+

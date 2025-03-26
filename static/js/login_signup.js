@@ -13,7 +13,7 @@ form.addEventListener('submit', async function(e) {
         'password': document.getElementById('password').value,
         };
         try{
-            const res = await axios.post(signUpEndpoint, formData,{
+            const res = await axios.post(signUpEndpoint, signUpFormData,{
                 headers: {
                     'Content-Type': 'application/json',
                 }
@@ -21,6 +21,7 @@ form.addEventListener('submit', async function(e) {
             console.log('これはサインアップです。データを送信できました')
             localStorage.setItem('jwt_token', res.data.access)
             localStorage.setItem('refresh_token', res.data.refresh)
+            window.location.href = '/'
         } catch (err) {
             console.log('これはサインアップです。データを送信できませんでした', err)
         }

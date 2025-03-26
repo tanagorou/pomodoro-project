@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="{% static 'css/timer.css' %}?v=1">
-
+<audio id="notificationSound" src="{% static 'audio/notification.mp3' %}"></audio>
 </head>
 <body>
     <h1>オリジナルタイマーの設定</h1>
@@ -44,7 +44,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="{% static 'js/record.js' %}"></script>
     <script src="{% static 'js/auth.js' %}"></script>
+    <script src="{% static 'js/record.js' %}"></script>
 </body>
 </html>
