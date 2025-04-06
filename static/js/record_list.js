@@ -97,9 +97,11 @@ let currentOffset = 0;
 
 async function changeWeek(direction){
     currentOffset += direction
+    console.log(`currentOffset:${currentOffset}`)
     let weeklyRecord = await listDayRecord('week',currentOffset);
     updateChartDate(weeklyRecord, currentOffset)
 }
+
 
 document.addEventListener('DOMContentLoaded', async function(){
     checkLogin()
@@ -141,6 +143,7 @@ function displayDateLabels(offset = 0){
 
 function updateChartDate(dailyRecord, offset = 0){
     let labels = getDateLabels(offset)
+    console.log('labels:',labels)
     charVar = labels.map(datekey => {
         return dailyRecord[datekey] ? dailyRecord[datekey].work_total : 0
     })

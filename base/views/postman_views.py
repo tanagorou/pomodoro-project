@@ -34,7 +34,7 @@ class ListRecordAPIView(APIView):
 
         elif period == 'week':
             day_of_week = today.weekday()
-            monday = today -timedelta(days=day_of_week) + timedelta(weeks=offset)
+            monday = today -timedelta(days=day_of_week) + timedelta(weeks=offset+1)
             sunday = monday + timedelta(days=6)
             queryset = StudyRecordModel.objects.filter(
                 user=user,
