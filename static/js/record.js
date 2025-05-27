@@ -41,7 +41,7 @@ async function checkLogin(){
             headers: { Authorization: `JWT ${token}`}
         })
         console.log('認証成功',res.data)
-        document.getElementById('title').textContent = 'ようこそ！！颯汰のポメラードタイマーへ！！'
+        document.getElementById('title').textContent = 'さぁ、作業を始めましょう！'
     } catch (err) {
         console.log('認証失敗',err)
         window.location.href = '/login/'
